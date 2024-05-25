@@ -259,7 +259,6 @@ z"></path>
                     <div class="amountIntro">Se declino la transacción</div>
                     <div class="amount"><span>{{$data->currency}} $ {{$data->amount_in_cents/100}}</span></div>
                 @endif
-
                 @if ( $data->status_message != null )
                     <div class="amountIntro">{{ $data->status_message  }}</div>
                 @endif

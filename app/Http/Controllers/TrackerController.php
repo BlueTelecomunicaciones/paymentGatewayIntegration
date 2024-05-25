@@ -68,15 +68,23 @@ class TrackerController extends Controller
             if ( $response->getStatusCode() == 200 ) {
 
                 return view('response' , [ "response" => (object)[
-                    "message" => "El pago se efectuo exitosamente.",
+                    "message" => "El pago se efectuo exitosamente r.",
                     "status" => true
-                ] , "data" => $object ]);
+                ] , "data" => $object->data ]);
 
+            }else {
+                return view('response', [
+                    "response" => (object)[
+                        "message" => "Hubo un problema al procesar la solicitud.",
+                        "status" => false
+                    ],
+                    "data" => null
+                ]);
             }
 
         } catch (\GuzzleHttp\Exception\ConnectException $e) {
             // This is will catch all connection timeouts
-            // Handle accordinly
+            return $e->getResponse()->getStatusCode();
         } catch (\GuzzleHttp\Exception\ClientException $e) {
             // This will catch all 400 level errors.
             return $e->getResponse()->getStatusCode();
